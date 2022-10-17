@@ -1,1 +1,24 @@
+import unittest
 
+from githubapi import git
+
+
+class TestCase(unittest.TestCase):
+
+    def test_repoA(self):
+
+      username = 'dalviker'
+
+
+      urllib = 'https://github.com/dalviker/eye.skylark'
+
+      unittest.save(username)
+
+      expected = unittest.selectExistsUsername(urllib)
+
+      assertThat(expected).isTrue()
+
+
+
+if __name__ == '__main__':
+    unittest.main()
