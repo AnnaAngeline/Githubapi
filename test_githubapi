@@ -17,6 +17,18 @@ class TestCase(unittest.TestCase):
       expected = unittest.selectExistsUsername(urllib)
 
       assertThat(expected).isTrue()
+      
+    def test_repoB(self):
+    
+        username = 'mdw1982'
+
+        urllib = 'https://github.com/mdw1982'
+
+        unittest.save(username)
+
+        expected = unittest.selectExistsUsername(urllib)
+
+        assertThat(expected).isTrue()
 
 
 
