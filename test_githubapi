@@ -1,35 +1,42 @@
 import unittest
-
-from githubapi import git
-
-
-class TestCase(unittest.TestCase):
-
-    def test_repoA(self):
-
-      username = 'dalviker'
+import requests
+from nose.tools import assert_true
+from unittest.mock import patch
+from GitHubApi import getResp
+from GitHubApi import getCommits_url
 
 
-      urllib = 'https://github.com/dalviker/eye.skylark'
+class TesttestApi(unittest.TestCase):
 
-      unittest.save(username)
+    @patch('GitHubApi.requests.get')
+    def testNumberofRepo(self, mock):
+        mock.get('https://api.github.com/users/dalviker/repos', text='success')
+        self.assertEqual(getResp('https://api.github.com/users/dalviker/repos'), 'success')
 
-      expected = unittest.selectExistsUsername(urllib)
+    @patch('GitHubApi.requests.get')
+    def testNumCommits(self, mock):
+        mock.get('https://github.com/dalviker/eye.skylark/commits', 0)
+        self.assertEqual(getCommits_url('https://github.com/dalviker/eye.skylark/commits', 'scy'), 0)
 
-      assertThat(expected).isTrue()
-      
-    def test_repoB(self):
-    
-        username = 'mdw1982'
+    def testUrlRepo(self):
+        response = requests.get('https://api.github.com/users/dalviker/repos')
+        assert_true(response.ok)
 
-        urllib = 'https://github.com/mdw1982'
+    def testrepoCommits(self):
+        response = requests.get('https://github.com/dalviker/eye.skylark/commits')
+        assert_true(response.ok)
 
-        unittest.save(username)
+    @patch('GitHubApi.requests.get')
+    def testGetRepo(self, mock):
+        mock.get.response = "success"
+        response = getResp('dalviker')
+        assert_true(response)
 
-        expected = unittest.selectExistsUsername(urllib)
-
-        assertThat(expected).isTrue()
-
+    @patch('GitHubApi.requests.get')
+    def testGetCommit(self, mock):
+        mock.get.response = "success"
+        response = getCommits_url('dalviker', 'eye.skylark')
+        assert_true(response.as_integer_ratio())
 
 
 if __name__ == '__main__':
