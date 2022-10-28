@@ -8,12 +8,12 @@ from GitHubApi import getCommits_url
 
 class Testmock(unittest.TestCase):
 
-    @patch('GitHubApi.requests.get')
+    
     def testNumberofRepo(self, mock):
         mock.get('https://api.github.com/users/dalviker/repos', text='achieved')
         self.assertEqual(getResp('https://api.github.com/users/dalviker/repos'), 'achieved')
 
-    @patch('GitHubApi.requests.get')
+    
     def testNumCommits(self, mock):
         mock.get('https://github.com/dalviker/eye.skylark/commits', 0)
         self.assertEqual(getCommits_url('https://github.com/dalviker/eye.skylark/commits', 'scy'), 0)
@@ -26,13 +26,13 @@ class Testmock(unittest.TestCase):
         response = requests.get('https://github.com/dalviker/eye.skylark/commits')
         assert_true(response.ok)
 
-    @patch('GitHubApi.requests.get')
+   
     def testGetRepo(self, mock):
         mock.get.response = "achieved"
         response = getResp('dalviker')
         assert_true(response)
 
-    @patch('GitHubApi.requests.get')
+   
     def testGetCommit(self, mock):
         mock.get.response = "achieved"
         response = getCommits_url('dalviker', 'eye.skylark')
