@@ -9,31 +9,31 @@ from GitHubApi import getCommits_url
 class Testmock(unittest.TestCase):
 
     
-    def testNumberofRepo(self, mock):
+    def testRepo(self, mock):
         mock.get('https://api.github.com/users/dalviker/repos', text='achieved')
         self.assertEqual(getResp('https://api.github.com/users/dalviker/repos'), 'achieved')
 
     
-    def testNumCommits(self, mock):
+    def testCommit(self, mock):
         mock.get('https://github.com/dalviker/eye.skylark/commits', 0)
         self.assertEqual(getCommits_url('https://github.com/dalviker/eye.skylark/commits', 'scy'), 0)
 
-    def testUrlRepo(self):
+    def testUrlofRepo(self):
         response = requests.get('https://api.github.com/users/dalviker/repos')
         assert_true(response.ok)
 
-    def testrepoCommits(self):
+    def testCommits(self):
         response = requests.get('https://github.com/dalviker/eye.skylark/commits')
         assert_true(response.ok)
 
    
-    def testGetRepo(self, mock):
+    def testGetr(self, mock):
         mock.get.response = "achieved"
         response = getResp('dalviker')
         assert_true(response)
 
    
-    def testGetCommit(self, mock):
+    def testGetC(self, mock):
         mock.get.response = "achieved"
         response = getCommits_url('dalviker', 'eye.skylark')
         assert_true(response.as_integer_ratio())
